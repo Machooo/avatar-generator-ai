@@ -1,17 +1,30 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "devServer": "node ./express/bin/www"
   },
   "dependencies": {
+    "@types/uuid": "^9.0.8",
+    "cookie-parser": "^1.4.6",
+    "debug": "^4.3.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "http-errors": "^2.0.0",
+    "jade": "^1.11.0",
+    "morgan": "^1.10.0",
     "nuxt": "^3.11.1",
+    "pg": "^8.11.3",
+    "uuid": "^9.0.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "sass": "^1.72.0"
   }
 }

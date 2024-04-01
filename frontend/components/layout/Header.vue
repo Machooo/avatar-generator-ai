@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="header">
         <nuxt-link to="/">HOME</nuxt-link>
     </header>
 </template>

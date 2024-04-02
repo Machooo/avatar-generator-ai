@@ -1,12 +1,22 @@
-// Database
-// const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
 
-// main().catch(err => console.log(err));
+// MongoDB Connection URI
+const uri = 'mongodb://mongo:27017'; // Use 'mongo' as the hostname, it's the name of the service defined in docker-compose.yml
+const dbName = 'test'; // Database Name
 
-// async function main() {
-//   await mongoose.connect('mongodb://127.0.0.1:27017/test');
+// Create a MongoDB client instance
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-//   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-// }
+// Function to connect to MongoDB
+async function connectToMongo() {
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("Error connecting to MongoDB", err);
+    process.exit(1); // Exit the application if connection fails
+  }
+}
 
-// module.exports = main;
+// Export the client and connectToMongo function
+module.exports = { client, connectToMongo, dbName };

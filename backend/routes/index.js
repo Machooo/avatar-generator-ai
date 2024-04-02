@@ -1,17 +1,22 @@
-var express = require('express');
-var router = express.Router();
+const fs = require('fs');
+const path = require('path');
 
-/* GET home page. */
-module.exports = function(pool) {
-  router.get('/', function(req, res, next) {
-    pool.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
-      if (error) {
-        throw error;
-      }
-      
-      res.status(200).send(results.rows);
-    });
+// Function to dynamically import routes from the current directory
+function importRoutes() {
+  const routes = [];
+  const routeFiles = fs.readdirSync(__dirname);
+
+  routeFiles.forEach(file => {
+    if (file !== 'index.js' && file.endsWith('.js')) {
+      const routePath = `./${file}`;
+      const routeName = path.parse(file).name;
+      const router = require(routePath);
+      routes.push({ path: `/${routeName === 'homepage' ? '' : routeName}`, router });
+    }
   });
 
-  return router;
+  return routes;
 }
+
+// Export the function directly
+module.exports = importRoutes();

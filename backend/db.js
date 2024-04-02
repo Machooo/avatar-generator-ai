@@ -5,7 +5,7 @@ const uri = 'mongodb://mongo:27017'; // Use 'mongo' as the hostname, it's the na
 const dbName = 'test'; // Database Name
 
 // Create a MongoDB client instance
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri);
 
 // Function to connect to MongoDB
 async function connectToMongo() {

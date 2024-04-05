@@ -1,27 +1,25 @@
 {
-  "name": "astro-frontend",
+  "name": "frontend",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@types/uuid": "^9.0.8",
-    "cookie-parser": "^1.4.6",
-    "debug": "^4.3.4",
-    "dotenv": "^16.4.5",
-    "jade": "^1.11.0",
-    "nuxt": "^3.11.1",
-    "nuxt-server-utils": "^0.0.7",
-    "uuid": "^9.0.1"
-  },
-  "devDependencies": {
+    "next": "14.1.4",
+    "react": "^18",
+    "react-dom": "^18",
     "sass": "^1.72.0"
   },
-  "resolutions": {
-    "rollup": "npm:@rollup/wasm-node"
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.4",
+    "typescript": "^5"
   }
 }

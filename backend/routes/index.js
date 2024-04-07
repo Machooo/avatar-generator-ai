@@ -11,7 +11,7 @@ function importRoutes() {
       const routePath = `./${file}`;
       const routeName = path.parse(file).name;
       const router = require(routePath);
-      routes.push({ path: `/${routeName === 'homepage' ? '' : routeName}`, router });
+      routes.push({ path: `/api/${routeName}`, router });
     }
   });
 

@@ -3,15 +3,10 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-
-const { connectToMongo } = require('./db');
+const { connectToMongo } = require('./config/db');
+const { swagger_serve, swagger_settings} = require('./config/swagger');
 const routes = require('./routes');
-
 const app = express();
-
-// view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -26,6 +21,9 @@ connectToMongo();
 routes.forEach(({ path, router }) => {
   app.use(path, router);
 });
+
+// serve swagger docs
+app.use('/api/swagger', swagger_serve, swagger_settings);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

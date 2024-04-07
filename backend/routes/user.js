@@ -1,7 +1,7 @@
 const express = require("express");
 const env = require("dotenv");
 const router = express.Router();
-const { createUser } = require('./../controllers/userController');
+const userController = require('./../controllers/userController')
 
 /**
  * @openapi
@@ -56,12 +56,15 @@ router.get("/", function (req, res, next) {
  */
 router.post('/create', async (req, res) => {
   try {
-    const user = await createUser('ivan1969@211.ru', 'k890419962009K!');
+    const user = await createUser('', '');
     res.json(user)
   } catch (err) {
     console.error("Error creating user", err.message);
     res.status(500).json({ error: "Error creating user" });
   }
 });
+
+router.post('/login', userController.login);
+router.post("/login/refreshtoken", userController.refreshToken);
 
 module.exports = router;

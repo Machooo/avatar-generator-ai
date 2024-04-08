@@ -4,6 +4,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const config = require("./../config/auth");
 
+
+exports.test = async (req, res) => {
+  return res.status(200).json({ message: "Hello World" });
+};
+
 exports.createUser = async (req, res) => {
   // if (!email || !password) {
   //   throw new Error("Email and password are required");

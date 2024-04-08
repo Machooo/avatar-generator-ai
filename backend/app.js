@@ -6,6 +6,7 @@ const logger = require("morgan");
 const { connectToMongo } = require('./config/db');
 const { swagger_serve, swagger_settings} = require('./config/swagger');
 const routes = require('./routes');
+const cors = require('cors');
 const app = express();
 
 app.use(logger("dev"));
@@ -13,6 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+let corsOptions = {
+  origin : ['http://localhost:3000'],
+}
+app.use(cors(corsOptions));
 
 // Connection to mongo db
 connectToMongo();

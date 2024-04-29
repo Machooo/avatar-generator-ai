@@ -6,10 +6,10 @@ const { TokenExpiredError } = jwt;
 
 const catchError = (err, res) => {
   if (err instanceof TokenExpiredError) {
-    return res.status(401).send({ message: "Unauthorized! Access Token was expired!" });
+    return res.status(401).json({ message: "Unauthorized! Access Token was expired!" });
   }
 
-  return res.sendStatus(401).send({ message: "Unauthorized!" });
+  return res.status(401).json({ message: "Unauthorized!" });
 };
 
 /**
@@ -17,11 +17,14 @@ const catchError = (err, res) => {
  */
 const verifyToken = (req, res, next) => {
   // Extract the token from the request headers
-  const token = req.headers["x-access-token"];
+  const token = req.headers["authorization"].split(" ")[1];
+
+  console.log('verify token', token);
+  // const token = req.cookies.accessToken;
 
   // If no token is provided, send a 403 status with an error message
   if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
+    return res.status(403).json({ message: "No token provided!" });
   }
 
   // Verify the token using the secret key and handle any errors

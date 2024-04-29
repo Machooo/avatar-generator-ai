@@ -15,8 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-let corsOptions = {
-  origin : ['http://localhost:3000'],
+const corsOptions = {
+  credentials: true,
+  origin : [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000'
+  ],
 }
 app.use(cors(corsOptions));
 
@@ -25,6 +31,7 @@ connectToMongo();
 
 // register all routes
 routes.forEach(({ path, router }) => {
+  console.log(`Registering route: ${path} - ${router}`);
   app.use(path, router);
 });
 

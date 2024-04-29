@@ -24,6 +24,9 @@ router.get('/', userController.test)
 // });
 
 router.post('/login', userController.login);
+
+router.get("/login/protected", [verifyToken], userController.protected);
+
 router.post("/login/refreshtoken", [verifyToken], userController.refreshToken);
 
 module.exports = router;
